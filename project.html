@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Stunning Projects</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        .main {
+            padding: 80px 10%;
+            margin: 50px auto;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1200px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 50px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 5px 15px #c9a865;
+            transition: background 0.5s ease-in-out;
+            z-index: 1000;
+        }
+
+        .logo img {
+            height: auto;
+            width: 120px;
+            /* Adjusted width */
+            filter: drop-shadow(0 0 10px #c9a865);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .logo img:hover {
+            transform: scale(1.1);
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            transition: 0.3s ease-in-out;
+            padding: 10px;
+        }
+
+        .navbar ul li a:hover {
+            color: #c9a865;
+            text-shadow: 0 0 10px #c9a865;
+        }
+
+        .nav-toggle {
+            display: none;
+            font-size: 28px;
+            color: white;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            .navbar ul {
+                display: none;
+                flex-direction: column;
+                background: rgba(0, 0, 0, 0.9);
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                text-align: center;
+                border-radius: 0 0 15px 15px;
+                box-shadow: 0 5px 15px rgba(230, 0, 80, 0.3);
+            }
+
+            .navbar ul.show {
+                display: flex;
+            }
+        }
+
+        /* Stylish Small Footer */
+        .footer {
+            background: #0a0a0a;
+            color: #ccc;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 14px;
+            border-top: 2px solid #c9a865;
+            box-shadow: 0 -2px 10px rgba(201, 168, 101, 0.5);
+        }
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer p {
+            margin: 0;
+            color: #c9a865;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: 0.3s ease-in-out;
+        }
+
+        .footer-links a:hover {
+            color: #c9a865;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+        }
+
+        body {
+            background: black;
+            color: white;
+            text-align: center;
+            /* padding: 50px 20px; */
+        }
+
+        .title {
+            font-size: 3rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            color: #c9a865;
+            text-shadow: 0 0 15px #c9a865;
+        }
+
+        .buttons {
+            margin-bottom: 30px;
+        }
+
+        .filter-btn {
+            background: #c9a865;
+            color: white;
+            padding: 12px 25px;
+            margin: 5px;
+            border: none;
+            cursor: pointer;
+            border-radius: 25px;
+            font-size: 1rem;
+            transition: all 0.3s ease-in-out;
+            border: 1px solid #c9a865;
+        }
+
+        .filter-btn:hover {
+            background: #c9a865;
+            color: black;
+            transform: scale(1.1);
+        }
+
+        .projects {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .project {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 225, 255, 0.3);
+            text-align: center;
+            width: 320px;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            position: relative;
+        }
+
+        .project:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px#c9a865;
+        }
+
+        .project-img img {
+            width: 100%;
+            height: 200px;
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .project-img:hover img {
+            transform: scale(1.1);
+        }
+
+        .live-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #c9a865;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: black;
+            text-decoration: none;
+            opacity: 0;
+            transition: 0.3s ease-in-out;
+            box-shadow: 0 0 10px#c9a865;
+        }
+
+        .project-img:hover .live-btn {
+            opacity: 1;
+        }
+
+        .project h2 {
+            font-size: 1.5rem;
+            margin: 10px 0;
+            color: #c9a865;
+        }
+
+        .project p {
+            font-size: 1rem;
+            color: #ddd;
+        }
+
+        @media (max-width: 768px) {
+            .projects {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">
+            <img src="WhatsApp_Image_2025-02-17_at_22.55.05_94c68e26-removebg-preview (1).png
+            " alt="Zaneera's Logo">
+        </div>
+        <div class="nav-toggle" id="nav-toggle">☰</div>
+        <ul id="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="project.html">Projects</a></li>
+            <li><a href="testimonial">Testimonial</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </div>
+    <div class="main">
+
+        <h1 class="title">My Stunning Projects</h1>
+        <div class="buttons">
+            <button class="filter-btn" onclick="filterProjects('all')">All</button>
+            <button class="filter-btn" onclick="filterProjects('html')">HTML</button>
+            <button class="filter-btn" onclick="filterProjects('js')">JavaScript</button>
+        </div>
+</div>
+        <section class="projects">
+            <!-- Project 1 -->
+            <div class="project html">
+                <div class="project-img" onclick="openLive('https://registrationform1project.netlify.app/')">
+                    <img src="project 1.png" alt="Project 1">
+                    <a href="https://registrationform1project.netlify.app/" class="live-btn" target="_blank">LIVE</a>
+                </div>
+                <h2>Login Page</h2>
+                <p>Built using HTML & CSS</p>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project html">
+                <div class="project-img" onclick="openLive('https://disne-india.netlify.app/')">
+                    <img src="project 2.png" alt="Project 2">
+                    <a href="https://disne-india.netlify.app/" class="live-btn" target="_blank">LIVE</a>
+                </div>
+                <h2>Disney India</h2>
+                <p>Built using HTML & CSS Flexbox</p>
+            </div>
+            <div class="project html">
+                <div class="project-img" onclick="openLive('https://nowarch-architechture.netlify.app/')">
+                    <img src="project 3.png" alt="Project 2">
+                    <a href="https://nowarch-architechture.netlify.app/" class="live-btn" target="_blank">LIVE</a>
+                </div>
+                <h2>Nowarch Architechture</h2>
+                <p>Built using HTML & CSS Flexbox</p>
+            </div>
+            <div class="project html">
+                <div class="project-img" onclick="openLive('https://supermarketwebsite.netlify.app/')">
+                    <img src="project 4.png" alt="Project 2">
+                    <a href="https://supermarketwebsite.netlify.app/" class="live-btn" target="_blank">LIVE</a>
+                </div>
+                <h2>Super Market</h2>
+                <p>Built using HTML & CSS Flexbox</p>
+            </div>
+            <div class="project html">
+                <div class="project-img" onclick="openLive('https://travel-adventure-awaits.netlify.app/')">
+                    <img src="project 5.png" alt="Project 2">
+                    <a href="https://travel-adventure-awaits.netlify.app/" class="live-btn" target="_blank">LIVE</a>
+                </div>
+                <h2>Travel Adventure Awaits</h2>
+                <p>Built using HTML & CSS Flexbox</p>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project js">
+                <div class="project-img" onclick="openLive('https://tipscalculato.netlify.app/')">
+                    <img src="jsproject1.png" alt="Project 1">
+                    <a href="https://tipscalculato.netlify.app/" class="live-btn" target="_blank">LIVE</a>
+                </div>
+                <h2>ITips Calculator</h2>
+                <p>Built using JavaScript</p>
+            </div>
+            <div class="project js">
+                <div class="project-img" onclick="openLive('https://stringcompressiontool.netlify.app/')">
+                    <img src="jsproject2.png" alt="Project 2">
+                    <a href="https://stringcompressiontool.netlify.app/" class="live-btn" target="_blank">LIVE</a>
+                </div>
+                <h2>String Compression Tools</h2>
+                <p>Built using JavaScript</p>
+            </div>
+            <div class="project js">
+                <div class="project-img" onclick="openLive('https://bookcollectionmanager.netlify.app/')">
+                    <img src="jsproject3.png" alt="Project 3">
+                    <a href="https://bookcollectionmanager.netlify.app/" class="live-btn" target="_blank">LIVE</a>
+                </div>
+                <h2>Book Collection Manager</h2>
+                <p>Built using JavaScript</p>
+            </div>
+            <div class="project js">
+                <div class="project-img" onclick="openLive('https://dynamicdrawingcanvas.netlify.app/')">
+                    <img src="jsproject4.png" alt="Project 4">
+                    <a href="https://dynamicdrawingcanvas.netlify.app/" class="live-btn" target="_blank">LIVE</a>
+                </div>
+                <h2>Dynamic Drawing Canvas</h2>
+                <p>Built using JavaScript</p>
+            </div>
+            <div class="project js">
+                <div class="project-img" onclick="openLive('https://moviesearchfind.netlify.app/')">
+                    <img src="jsproject5.png" alt="Project 4">
+                    <a href="https://moviesearchfind.netlify.app/" class="live-btn" target="_blank">LIVE</a>
+                </div>
+                <h2>Movie Search App</h2>
+                <p>Built using JavaScript</p>
+            </div>
+    </div>
+    </section> <footer class="footer" data-aos="fade-up" data-aos-duration="1000">
+        <div class="footer-container">
+            <p>© 2025 by Zaneera. All Rights Reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </footer>
+    <script>     document.getElementById("nav-toggle").addEventListener("click", function () {
+            document.getElementById("nav-links").classList.toggle("show");
+        });
+
+
+        function filterProjects(category) {
+            let projects = document.querySelectorAll('.project');
+            projects.forEach(project => {
+                project.style.display = (category === 'all' || project.classList.contains(category)) ? 'block' : 'none';
+            });
+        }
+    </script>
+</body>
+
+</html>

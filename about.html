@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me - Zaneera Fathima</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #121212, #1e1e1e);
+            color: white;
+            text-align: center;
+            overflow-x: hidden;
+            /* Crucial: Prevents horizontal scrolling */
+            position: relative;
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 80px 10%;
+            margin: 50px auto;
+        }
+
+        .about-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        /* Image Section with Glow Effect */
+        .about-image {
+            position: relative;
+        }
+
+        .about-image img {
+            height: 300px;
+            width: 300px;
+            border-radius: 50%;
+            border: 5px solid #ffcc70;
+            transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+            object-fit: cover;
+        }
+
+        .about-image img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 40px #ffcc70;
+        }
+
+        /* Content */
+        .about-content {
+            max-width: 600px;
+            text-align: left;
+        }
+
+        .about-content h3 {
+            font-size: 2.5rem;
+            background: linear-gradient(90deg, #ffcc70, #fdbb2d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .about-content p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        /* Information List */
+        .info-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        .info-list li {
+            font-size: 1.1rem;
+            margin: 10px 0;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.4s ease-in-out;
+            cursor: pointer;
+        }
+
+        .info-list li:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(10px);
+        }
+
+        .info-list i {
+            color: #ffcc70;
+            font-size: 1.3rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .about-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .about-image img {
+                width: 80%;
+                height: auto;
+            }
+
+            .about-content {
+                text-align: center;
+            }
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1200px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 50px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 5px 15px #c9a865;
+            transition: background 0.5s ease-in-out;
+            z-index: 1000;
+        }
+
+        .logo img {
+            height: auto;
+            width: 120px;
+            filter: drop-shadow(0 0 10px #c9a865);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .logo img:hover {
+            transform: scale(1.1);
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            transition: 0.3s ease-in-out;
+            padding: 10px;
+        }
+
+        .navbar ul li a:hover {
+            color: #c9a865;
+            text-shadow: 0 0 10px #c9a865;
+        }
+
+        .nav-toggle {
+            display: none;
+            font-size: 28px;
+            color: white;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            .navbar ul {
+                display: none;
+                flex-direction: column;
+                background: rgba(0, 0, 0, 0.9);
+                position: absolute;
+                top: 104px;
+                left: 0;
+                width: 100%;
+                text-align: center;
+                border-radius: 0 0 15px 15px;
+                box-shadow: 0 5px 15px rgba(230, 0, 80, 0.3);
+            }
+
+            .navbar ul.show {
+                display: flex;
+            }
+        }
+
+        /* Stylish Small Footer */
+        .footer {
+            background: #0a0a0a;
+            color: #ccc;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 14px;
+            border-top: 2px solid #c9a865;
+            box-shadow: 0 -2px 10px rgba(201, 168, 101, 0.5);
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer p {
+            margin: 0;
+            color: #c9a865;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: 0.3s ease-in-out;
+        }
+
+        .footer-links a:hover {
+            color: #c9a865;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+        }
+
+        /* Responsive Design for Small Screens (300px - 450px) */
+        @media (max-width: 450px) {
+            .about-section {
+                padding: 50px 5%;
+            }
+
+            .about-image img {
+                width: 200px;
+                height: 200px;
+            }
+
+            .about-content h3 {
+                font-size: 1.8rem;
+            }
+
+            .about-content p {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+
+            .info-list li {
+                font-size: 1rem;
+                padding: 10px;
+                gap: 10px;
+            }
+
+            .info-list i {
+                font-size: 1.1rem;
+            }
+
+            .navbar {
+                width: 95%;
+                padding: 10px 15px;
+            }
+
+            .logo img {
+                width: 100px;
+            }
+
+            .nav-toggle {
+                font-size: 24px;
+            }
+
+            .navbar ul {
+                top: 90px;
+            }
+
+            .footer {
+                font-size: 12px;
+                padding: 10px 0;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: auto;
+            width: 90%;
+            /* overflow-x: hidden; */
+
+        }
+
+        .title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: -webkit-linear-gradient(left, #FF5F6D, #FFC371);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .timeline-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+        }
+
+        /* Vertical glowing line */
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, #FF5F6D, #FFC371);
+            transform: translateX(-50%);
+            /* overflow-x: hidden; */
+        }
+
+        .timeline-item {
+            position: relative;
+            width: 46%;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border-radius: 12px;
+            box-sizing: border-box;
+            /* Important for width calculations */
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        /* Timeline dot with animation */
+        .timeline-dot {
+            width: 20px;
+            height: 20px;
+            background: #FFC371;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            box-shadow: 0 0 10px rgba(255, 195, 113, 0.8), 0 0 20px rgba(255, 195, 113, 0.6);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-dot {
+            right: -10px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-dot {
+            left: -10px;
+        }
+
+        /* Hover Effects */
+        .timeline-item:hover {
+            transform: scale(1.05) rotate(1deg);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+        }
+
+        .timeline-item h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #FFC371;
+        }
+
+        .timeline-item span {
+            display: block;
+            font-size: 1rem;
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+
+        .timeline-item p {
+            font-size: 1.1rem;
+            color: #ddd;
+        }
+
+        /* Media query for screens between 768px and 900px (tablets) */
+        @media (max-width: 900px) and (min-width: 768px) {
+            .timeline-item {
+                width: 100%;
+                /* Make timeline items full-width */
+                left: 0 !important;
+                /* Override left positioning */
+                padding: 20px;
+            }
+
+            .timeline-container::before {
+                left: 10px;
+                /* Adjust vertical line position */
+            }
+
+            .timeline-item:nth-child(odd) .timeline-dot,
+            .timeline-item:nth-child(even) .timeline-dot {
+                left: -10px;
+                /* Adjust dot position */
+                right: auto;
+            }
+        }
+
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .timeline-container::before {
+                left: 10px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+                padding-left: 30px;
+                box-sizing: border-box;
+            }
+
+            li.aos-init.aos-animate {
+                display: block;
+            }
+
+            .about-content.aos-init.aos-animate {
+                width: 98%;
+            }
+
+            h2.title.aos-init.aos-animate {
+                font-size: 22px;
+            }
+
+            .timeline-item .timeline-dot {
+                left: -10px;
+                right: auto;
+            }
+        }
+
+        .navbar ul {
+            transition: max-height 0.5s ease-in-out;
+            /* overflow: hidden; */
+            max-height: 0;
+        }
+
+        .navbar ul.show {
+            max-height: 300px;
+        }
+
+        .timeline-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(255, 195, 113, 0.5);
+        }
+
+        .footer-container {
+            flex-direction: column;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">
+            <img src="WhatsApp_Image_2025-02-17_at_22.55.05_94c68e26-removebg-preview (1).png" alt="Zaneera's Logo">
+        </div>
+        <div class="nav-toggle" id="nav-toggle">☰</div>
+        <ul id="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="project.html">Projects</a></li>
+            <li><a href="testimonial.html">Testimonial</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </div>
+    <div class="main">
+        <section class="about-section" data-aos="fade-down" data-aos-duration="1000">
+            <h1>ABOUT ME</h1>
+            <div class="about-container">
+                <div class="about-image" data-aos="fade-right" data-aos-duration="1000">
+                    <img src="muslim-girls-dp-for-instagram-2.webp" alt="Zaneera Fathima">
+                </div>
+                <div class="about-content" data-aos="fade-left" data-aos-duration="1000">
+                    <h3>Hello! I'm <span>Zaneera Fathima</span></h3>
+                    <p>
+                        I am a passionate <strong>web developer</strong>, currently in my <strong>first year</strong>
+                        of a
+                        <strong>Bachelor of Computer Applications (BCA)</strong> at Madras University.
+                        With a deep love for coding and design, I strive to create
+                        <strong>user-friendly, elegant,
+                            and interactive websites</strong> that not only look stunning but also provide a seamless
+                        experience.
+                        I am always excited to explore the latest technologies, enhance my skills,
+                        and push creative boundaries to build <strong>innovative and impactful digital
+                            solutions</strong>.
+                        My ultimate goal is to grow as an <strong>IT professional</strong>, contributing to the tech
+                        world
+                        through creativity and problem-solving.
+                    </p>
+                    <ul class="info-list">
+                        <li data-aos="fade-up" data-aos-duration="500"><i class="fas fa-birthday-cake"></i>
+                            <strong>Birthday:</strong> 07 December 2006
+                        </li>
+                        <li data-aos="fade-up" data-aos-duration="500" data-aos-delay="100"><i
+                                class="fas fa-map-marker-alt"></i> <strong>Location:</strong> Ambur, Tamil Nadu, India
+                        </li>
+                        <li data-aos="fade-up" data-aos-duration="500" data-aos-delay="200"><i
+                                class="fas fa-graduation-cap"></i> <strong>Degree:</strong> Pursuing BCA</li>
+                        <li data-aos="fade-up" data-aos-duration="500" data-aos-delay="300"><i
+                                class="fas fa-envelope"></i> <strong>Email:</strong>
+                            saadnadeem9894974110@gmail.com
+                        </li>
+                        <li data-aos="fade-up" data-aos-duration="500" data-aos-delay="400"><i class="fas fa-phone"></i>
+                            <strong>Phone:</strong> +91 8667024791</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section class="timeline">
+            <h2 class="title" data-aos="fade-down" data-aos-duration="1000">✨ My Educational Journey ✨</h2>
+            <div class="timeline-container">
+
+                <div class="timeline-item" data-aos="fade-right" data-aos-duration="1000">
+                    <div class="timeline-dot"></div>
+                    <h3>Primary School</h3>
+                    <span>2010 - 2016</span>
+                    <p>Shakespeare Ideal N & P School, Ambur, provides quality education for young learners. It
+                        emphasizes academics, creativity, and overall growth. The school fosters a nurturing and
+                        interactive learning environment. With dedicated faculty, it ensures a strong foundation for
+                        students. Extracurricular activities and a disciplined environment help shape well-rounded
+                        individuals.</p>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-left" data-aos-duration="1000">
+                    <div class="timeline-dot"></div>
+                    <h3>Secondary School</h3>
+                    <span>2016 - 2017</span>
+                    <p>Banghi Hayath Basha Sahib School is an educational institution in Ambur, Tamil Nadu, India. It is
+                        known for providing quality education and fostering a strong academic foundation for students.
+                        The school has an active presence in the community, celebrating national events such as Republic
+                        Day with enthusiasm and participation from students, teachers, and local dignitaries.</p>
+                    </p>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-right" data-aos-duration="1000">
+                    <div class="timeline-dot"></div>
+                    <h3>Higher Secondary</h3>
+                    <span>2017 - 2024</span>
+                    <p>Hasnath E Jaria (G) Hr. Sec. School, Ambur, established in 1964, is a private-aided institution
+                        located in the urban area of Madhanur block, Vellore district, Tamil Nadu. It is a girls' school
+                        offering education from grades 6 to 12, with Urdu as the medium of instruction. The school
+                        operates as a non-Ashram type (Govt.) institution and functions in a dedicated building without
+                        shift-schooling. It is easily accessible by all-weather roads, and the academic session starts
+                        in April every year.</p>
+                </div>
+
+                <div class="timeline-item" data-aos="fade-left" data-aos-duration="1000">
+                    <div class="timeline-dot"></div>
+                    <h3>University of Madras</h3>
+                    <span>2024 - Present</span>
+                    <p>The Public Petition dated 11-11-1839 initiated the establishment of Madras University. It was in
+                        January 1840 with Mr.George Norton as its President, that the University Board was constituted.
+                        I am currently pursuing my 1st year of Bachelor of Computer Applications (BCA) at the University
+                        of Madras. Alongside my studies, I am also engaged in learning and skill development through
+                        various Women's Coaching Centres, which empower and support women in technology and education.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+        <footer class="footer" data-aos="fade-up" data-aos-duration="1000">
+            <div class="footer-container">
+                <p>© 2025 by Zaneera. All Rights Reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        document.getElementById("nav-toggle").addEventListener("click", function () {
+            document.getElementById("nav-links").classList.toggle("show");
+        });
+        AOS.init({
+            once: true, // Whether animation should happen only once - while scrolling down
+        });
+    </script>
+</body>
+
+</html>

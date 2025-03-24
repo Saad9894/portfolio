@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testimonial Section</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1200px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 50px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 5px 15px #c9a865;
+            transition: background 0.5s ease-in-out;
+            z-index: 1000;
+        }
+
+        .logo img {
+            height: auto;
+            width: 120px;
+            /* Adjusted width */
+            filter: drop-shadow(0 0 10px #c9a865);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .logo img:hover {
+            transform: scale(1.1);
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            transition: 0.3s ease-in-out;
+            padding: 10px;
+        }
+
+        .navbar ul li a:hover {
+            color: #c9a865;
+            text-shadow: 0 0 10px #c9a865;
+        }
+
+        .nav-toggle {
+            display: none;
+            font-size: 28px;
+            color: white;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            .navbar ul {
+                display: none;
+                flex-direction: column;
+                background: rgba(0, 0, 0, 0.9);
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                text-align: center;
+                border-radius: 0 0 15px 15px;
+                box-shadow: 0 5px 15px rgba(230, 0, 80, 0.3);
+            }
+
+            .navbar ul.show {
+                display: flex;
+            }
+        }
+
+        /* Stylish Small Footer */
+        .footer {
+            background: #0a0a0a;
+            color: #ccc;
+            text-align: center;
+            margin-top: 5%;
+            padding: 15px 0;
+            font-size: 14px;
+            border-top: 2px solid #c9a865;
+            box-shadow: 0 -2px 10px rgba(201, 168, 101, 0.5);
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer p {
+            margin: 0;
+            color: #c9a865;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: 0.3s ease-in-out;
+        }
+
+        .footer-links a:hover {
+            color: #c9a865;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+        }
+body{
+
+    background: linear-gradient(135deg, #121212, #1c1c1c);
+}
+        .main{
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #ff9800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            text-shadow: 0px 0px 15px rgba(255, 152, 0, 0.7);
+        }
+
+        /* Testimonial Grid */
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        /* Testimonial Card */
+        .testimonial-card {
+            width: 100%;
+            height: 400px;
+            perspective: 1000px;
+        }
+
+        .testimonial-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.7s ease-in-out;
+        }
+
+        .testimonial-card:hover .testimonial-inner {
+            transform: rotateY(180deg);
+        }
+
+        /* Front and Back Side */
+        .testimonial-front,
+        .testimonial-back {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        .testimonial-front {
+            background: rgba(255, 165, 0, 0.1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 15px rgba(255, 165, 0, 0.3);
+        }
+
+        .testimonial-card:hover .testimonial-front {
+            box-shadow: 0 0 30px rgba(255, 165, 0, 0.7);
+        }
+
+        .testimonial-back {
+            background: #ff9800;
+            transform: rotateY(180deg);
+            color: black;
+        }
+
+        /* Profile Image */
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            border: 4px solid white;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: #ff9800;
+        }
+
+        .role {
+            font-size: 1rem;
+            color: #ddd;
+            margin-bottom: 10px;
+        }
+
+        .testimonial-text {
+            font-size: 1rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .testimonial-back p {
+            font-size: 1rem;
+            font-style: italic;
+            text-align: center;
+            color: black;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+        }   .main {
+            padding: 80px 10%;
+            margin: 50px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">
+            <img src="WhatsApp_Image_2025-02-17_at_22.55.05_94c68e26-removebg-preview (1).png
+            " alt="Zaneera's Logo">
+        </div>
+        <div class="nav-toggle" id="nav-toggle">☰</div>
+        <ul id="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="project.html">Projects</a></li>
+            <li><a href="testimonial.html">Testimonial</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </div>
+<div class="main">
+
+
+    <h1>Testimonial</h1>
+    <p>Working with my friends as a team has been an incredible journey. We've shared knowledge, solved challenges, and
+        built creative projects together. Each of them brings unique talents and dedication, making our collaborations
+        exciting and rewarding.</p>
+</div>
+    <div class="testimonial-grid">
+        <!-- Testimonial 1 -->
+        <div class="testimonial-card">
+            <div class="testimonial-inner">
+                <div class="testimonial-front">
+                    <img src="ayesha.png" alt="Ayesha Siddique V" class="profile-img">
+                    <h2>Ayesha Siddique V</h2>
+                    <p class="role">Flutter Developer</p>
+                    <p class="testimonial-text">"Building apps that make an impact!"</p>
+                </div>
+                <div class="testimonial-back">
+                    <p>"Ayesha is a coding genius! Her ability to bring innovative app ideas to life is truly inspiring.
+                        She never stops learning and improving!"</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="testimonial-card">
+            <div class="testimonial-inner">
+                <div class="testimonial-front">
+                    <img src="subiya.png" alt="Subiya Suman.V" class="profile-img">
+                    <h2>Subiya Suman.V</h2>
+                    <p class="role">UI/UX Designer</p>
+                    <p class="testimonial-text">"Designing experiences that feel effortless and beautiful!"</p>
+                </div>
+                <div class="testimonial-back">
+                    <p>"Subiya’s creativity and attention to detail are unmatched. She transforms ideas into visually
+                        stunning and user-friendly designs!"</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="testimonial-card">
+            <div class="testimonial-inner">
+                <div class="testimonial-front">
+                    <img src="hajeera.png" alt="Hajeera Bathool" class="profile-img">
+                    <h2>Hajeera Bathool</h2>
+                    <p class="role">Flutter Developer</p>
+                    <p class="testimonial-text">"Turning concepts into seamless mobile experiences!"</p>
+                </div>
+                <div class="testimonial-back">
+                    <p>"Hajeera’s ability to optimize and enhance user experiences through smooth, efficient
+                        applications is truly remarkable!"</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Testimonial 4 -->
+        <div class="testimonial-card">
+            <div class="testimonial-inner">
+                <div class="testimonial-front">
+                    <img src="shazima.png" alt="Shazima Kouser" class="profile-img">
+                    <h2>Shazima Kouser</h2>
+                    <p class="role">React.js Developer</p>
+                    <p class="testimonial-text">"Crafting responsive and dynamic web apps!"</p>
+                </div>
+                <div class="testimonial-back">
+                    <p>"Shazima’s expertise in front-end development ensures that every project she touches is smooth,
+                        fast, and beautifully crafted!"</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer" data-aos="fade-up" data-aos-duration="1000">
+        <div class="footer-container">
+            <p>© 2025 by Zaneera. All Rights Reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </footer>
+</div>
+    <script>
+        document.getElementById("nav-toggle").addEventListener("click", function () {
+            document.getElementById("nav-links").classList.toggle("show");
+        });
+
+    </script>
+</body>
+
+</html>
