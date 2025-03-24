@@ -456,8 +456,16 @@
                 width: 90%;
             }
         }
-
-        /* Stylish Small Footer */
+ /* Stylish Small Footer */
+ .footer {
+            background: #0a0a0a;
+            color: #ccc;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 14px;
+            border-top: 2px solid #c9a865;
+            box-shadow: 0 -2px 10px rgba(201, 168, 101, 0.5);
+        }
 
         .footer-container {
             display: flex;
@@ -497,7 +505,28 @@
                 gap: 10px;
             }
         }
+        /* Responsive Design for Small Screens (300px - 450px) */
+        @media (max-width: 450px) {
+          
+         
 
+            .footer {
+                font-size: 12px;
+                padding: 10px 0;
+         
+        }
+
+    }
+
+   
+ 
+
+        .footer-container {
+            flex-direction: column;
+            text-align: center;
+        }
+       
+    
         .active {
             /* color: #c9a865; */
             background-color: #c9a865;
