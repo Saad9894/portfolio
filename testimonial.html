@@ -4,17 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Testimonial Section</title>
+    <title>Testimonial Slider</title>
     <style>
         /* Global Styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            /* font-family: "Poppins", sans-serif; */
         }
 
-        /* Navbar */
+        body {
+            background: linear-gradient(135deg, #121212, #1c1c1c);
+            color: white;
+            /* font-family: sans-serif; Added a default font for better readability */
+        }
+
+        /* Navbar Styles (Keeping these as they are in your original code) */
         .navbar {
             position: fixed;
             top: 0;
@@ -100,7 +105,7 @@
             background: #0a0a0a;
             color: #ccc;
             text-align: center;
-            margin-top: 5%;
+            margin-top: 7%;
             padding: 15px 0;
             font-size: 14px;
             border-top: 2px solid #c9a865;
@@ -145,97 +150,61 @@
                 gap: 10px;
             }
         }
-body{
 
-    background: linear-gradient(135deg, #121212, #1c1c1c);
-}
-        .main{
-            color: white;
+
+        .main {
+            padding: 80px 10%;
             text-align: center;
-            padding: 50px 20px;
+            margin: 50px auto;
         }
 
         h1 {
-            font-size: 3rem;
-            color:#daa659;
+            font-size:31px;
+            color: #daa659;
             text-transform: uppercase;
             letter-spacing: 2px;
             margin-bottom: 30px;
             text-shadow: 0px 0px 15px rgba(255, 152, 0, 0.7);
         }
 
-        /* Testimonial Grid */
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 20px;
-            max-width: 1000px;
-            margin: auto;
+        /* Testimonial Slider Styles */
+        .testimonial-slider-container {
+            width: 90%;
+            max-width: 800px;  /* Or adjust to your preferred width */
+            margin: 50px auto;
+            overflow: hidden; /* Important for the slider effect */
+            position: relative; /* For positioning navigation buttons */
         }
 
-        /* Testimonial Card */
+        .testimonial-slider {
+            display: flex; /* Arrange testimonials horizontally */
+            transition: transform 0.5s ease-in-out; /* Smooth animation */
+        }
+
         .testimonial-card {
-            width: 100%;
-            height: 400px;
-            perspective: 1000px;
-        }
-
-        .testimonial-inner {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.7s ease-in-out;
-        }
-
-        .testimonial-card:hover .testimonial-inner {
-            transform: rotateY(180deg);
-        }
-
-        /* Front and Back Side */
-        .testimonial-front,
-        .testimonial-back {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            backface-visibility: hidden;
-            border-radius: 15px;
+            width: 100%; /* Each card takes up the full container width */
+            flex-shrink: 0;  /* Prevent cards from shrinking */
             padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transition: box-shadow 0.3s ease-in-out;
-        }
-
-        .testimonial-front {
+            border-radius: 15px;
             background: rgba(255, 165, 0, 0.1);
             backdrop-filter: blur(10px);
             box-shadow: 0 0 15px rgba(255, 165, 0, 0.3);
+            text-align: center; /* Center content within each card */
         }
 
-        .testimonial-card:hover .testimonial-front {
-            box-shadow: 0 0 30px rgba(255, 165, 0, 0.7);
-        }
-
-        .testimonial-back {
-            background:#daa659;
-            transform: rotateY(180deg);
-            color: black;
-        }
-
-        /* Profile Image */
+        /* Testimonial Content Styling (Keeping the original styles, adjusted) */
         .profile-img {
             width: 100px;
             height: 100px;
             border-radius: 50%;
             margin-bottom: 10px;
             border: 4px solid white;
+            object-fit: cover; /*  Ensures the image fills the space properly */
         }
 
         h2 {
             font-size: 1.5rem;
-            color:#daa659;
+            color: #daa659;
         }
 
         .role {
@@ -246,27 +215,35 @@ body{
 
         .testimonial-text {
             font-size: 1rem;
-            font-weight: bold;
             color: white;
+            font-weight: bold;
         }
 
-        .testimonial-back p {
-            font-size: 1rem;
-            font-style: italic;
-            text-align: center;
-            color: black;
+        /* Navigation Buttons */
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 10px;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .testimonial-grid {
-                grid-template-columns: 1fr;
-            }
-        }   .main {
-            padding: 80px 10%;
-            margin: 50px auto;
+        .slider-nav button {
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
-        .active {
+
+        .slider-nav button:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+         .active {
             /* color: #c9a865; */
             background-color: #c9a865;
         }
@@ -289,79 +266,63 @@ body{
             <li><a href="contact.html">Contact</a></li>
         </ul>
     </div>
-<div class="main">
+    <div class="main">
+        <h1>Testimonials</h1>
+        <p>Working with my friends as a team has been an incredible journey. We've shared knowledge, solved challenges,
+            and built creative projects together. Each of them brings unique talents and dedication, making our
+            collaborations exciting and rewarding.</p>
+    </div>
 
+    <!-- Testimonial Slider -->
+    <div class="testimonial-slider-container">
+        <div class="testimonial-slider" id="testimonialSlider">
+            <!-- Testimonial 1 -->
+            <div class="testimonial-card">
+                <img src="ayesha.png" alt="Ayesha Siddique V" class="profile-img">
+                <h2>Ayesha Siddique V</h2>
+                <p class="role">Flutter Developer</p>
+                <p class="testimonial-text">"Building apps that make an impact!"</p>
+                <p>Ayesha is a coding genius! Her ability to bring innovative app ideas to life is truly inspiring.
+                    She never stops learning and improving!</p>
+            </div>
 
-    <h1>Testimonial</h1>
-    <p>Working with my friends as a team has been an incredible journey. We've shared knowledge, solved challenges, and
-        built creative projects together. Each of them brings unique talents and dedication, making our collaborations
-        exciting and rewarding.</p>
-</div>
-    <div class="testimonial-grid">
-        <!-- Testimonial 1 -->
-        <div class="testimonial-card">
-            <div class="testimonial-inner">
-                <div class="testimonial-front">
-                    <img src="ayesha.png" alt="Ayesha Siddique V" class="profile-img">
-                    <h2>Ayesha Siddique V</h2>
-                    <p class="role">Flutter Developer</p>
-                    <p class="testimonial-text">"Building apps that make an impact!"</p>
-                </div>
-                <div class="testimonial-back">
-                    <p>"Ayesha is a coding genius! Her ability to bring innovative app ideas to life is truly inspiring.
-                        She never stops learning and improving!"</p>
-                </div>
+            <!-- Testimonial 2 -->
+            <div class="testimonial-card">
+                <img src="subiya.png" alt="Subiya Suman.V" class="profile-img">
+                <h2>Subiya Suman.V</h2>
+                <p class="role">UI/UX Designer</p>
+                <p class="testimonial-text">"Designing experiences that feel effortless and beautiful!"</p>
+                <p>Subiya’s creativity and attention to detail are unmatched. She transforms ideas into visually
+                    stunning and user-friendly designs!</p>
+            </div>
+
+            <!-- Testimonial 3 -->
+            <div class="testimonial-card">
+                <img src="hajeera.png" alt="Hajeera Bathool" class="profile-img">
+                <h2>Hajeera Bathool</h2>
+                <p class="role">Flutter Developer</p>
+                <p class="testimonial-text">"Turning concepts into seamless mobile experiences!"</p>
+                <p>Hajeera’s ability to optimize and enhance user experiences through smooth, efficient applications
+                    is truly remarkable!</p>
+            </div>
+
+            <!-- Testimonial 4 -->
+            <div class="testimonial-card">
+                <img src="shazima.png" alt="Shazima Kouser" class="profile-img">
+                <h2>Shazima Kouser</h2>
+                <p class="role">React.js Developer</p>
+                <p class="testimonial-text">"Crafting responsive and dynamic web apps!"</p>
+                <p>Shazima’s expertise in front-end development ensures that every project she touches is smooth, fast,
+                    and beautifully crafted!</p>
             </div>
         </div>
-
-        <!-- Testimonial 2 -->
-        <div class="testimonial-card">
-            <div class="testimonial-inner">
-                <div class="testimonial-front">
-                    <img src="subiya.png" alt="Subiya Suman.V" class="profile-img">
-                    <h2>Subiya Suman.V</h2>
-                    <p class="role">UI/UX Designer</p>
-                    <p class="testimonial-text">"Designing experiences that feel effortless and beautiful!"</p>
-                </div>
-                <div class="testimonial-back">
-                    <p>"Subiya’s creativity and attention to detail are unmatched. She transforms ideas into visually
-                        stunning and user-friendly designs!"</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Testimonial 3 -->
-        <div class="testimonial-card">
-            <div class="testimonial-inner">
-                <div class="testimonial-front">
-                    <img src="hajeera.png" alt="Hajeera Bathool" class="profile-img">
-                    <h2>Hajeera Bathool</h2>
-                    <p class="role">Flutter Developer</p>
-                    <p class="testimonial-text">"Turning concepts into seamless mobile experiences!"</p>
-                </div>
-                <div class="testimonial-back">
-                    <p>"Hajeera’s ability to optimize and enhance user experiences through smooth, efficient
-                        applications is truly remarkable!"</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Testimonial 4 -->
-        <div class="testimonial-card">
-            <div class="testimonial-inner">
-                <div class="testimonial-front">
-                    <img src="shazima.png" alt="Shazima Kouser" class="profile-img">
-                    <h2>Shazima Kouser</h2>
-                    <p class="role">React.js Developer</p>
-                    <p class="testimonial-text">"Crafting responsive and dynamic web apps!"</p>
-                </div>
-                <div class="testimonial-back">
-                    <p>"Shazima’s expertise in front-end development ensures that every project she touches is smooth,
-                        fast, and beautifully crafted!"</p>
-                </div>
-            </div>
+        <!-- Slider Navigation -->
+        <div class="slider-nav">
+            <button onclick="prevSlide()">❮</button>
+            <button onclick="nextSlide()">❯</button>
         </div>
     </div>
+
     <footer class="footer" data-aos="fade-up" data-aos-duration="1000">
         <div class="footer-container">
             <p>© 2025 Design by Zaneera. All Rights Reserved.</p>
@@ -372,11 +333,42 @@ body{
             </div>
         </div>
     </footer>
-</div>
+
     <script>
+        // Navbar toggle
         document.getElementById("nav-toggle").addEventListener("click", function () {
             document.getElementById("nav-links").classList.toggle("show");
         });
+
+        // Testimonial slider
+        const slider = document.getElementById('testimonialSlider');
+        const cards = document.querySelectorAll('.testimonial-card');
+        let currentSlide = 0;
+        const totalSlides = cards.length;
+
+        function showSlide(n) {
+            currentSlide = n;
+            if (currentSlide >= totalSlides) {
+                currentSlide = 0;
+            }
+            if (currentSlide < 0) {
+                currentSlide = totalSlides - 1;
+            }
+
+            const translateXValue = -currentSlide * 100 + '%'; // Calculate the correct percentage
+            slider.style.transform = 'translateX(' + translateXValue + ')';
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        // Initial slide
+        showSlide(0);
 
     </script>
 </body>
